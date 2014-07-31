@@ -9,7 +9,7 @@ How to
 2. Drag the Pinoccio header and class file into your iOS project, Copy to project directory if needed, and add to your iOS app's target.
 3. Add the header to whatever class you need to use the APi in.
 ```objc
-import "Pinoccio.h"
+#import "Pinoccio.h"
 ```
 
 Functions, basic usage.
