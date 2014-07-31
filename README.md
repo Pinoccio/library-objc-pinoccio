@@ -20,9 +20,9 @@ Initializing library
 PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init];
 ```
 
-Logging in. 
+Logging in. Required arguments: email, password
 ```objc
-NSString *token;
+NSString *token; // This and the bool can be a global variable that can be used anywhere in the class, the example demos this.
 BOOL isLoggedIn;
 
 pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" withCompletion:^(NSString *generatedToken, BOOL isOK) {
@@ -35,11 +35,50 @@ pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" wit
 }];
 ```
 
-Logging out
+Logging out. Required arguments: token
 ```objc
 [pinoccioAPI logoutWithToken:token withCompletion:^(BOOL isOK) {
     if (isOK) {
         [[[UIAlertView alloc] initWithTitle:@"Success!" message:@"You're logged out :D" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+    }
+}];
+```
+
+Get array of troops for account.  Required arguments: token
+```objc
+[pinoccioAPI troopWithToken:token withCompletion:^(NSArray *troops, BOOL isOK) {
+    if (isOK) {
+        // Do something with troops
+    }else {
+        NSLog(@"Data is nil/null, check if user is logged in and token is valid.");
+    }
+}];
+```
+
+Get array of scouts in troop. Required arguments: TroopID, token
+```objc
+[pinoccioAPI scoutsWithTroopID:1 withToken:token withCompletion:^(NSArray *scoutArray, BOOL isOK) {
+    if (isOK) {
+        // Do something with scoutArray
+    }
+}];
+```
+
+Toggle led, pass bool true/false for led on/off. Required arguments: ScoutID, TroopID, token
+```objc
+[pinoccioAPI led:YES withScoutID:selectedScout withTroopID:selectedTroop withToken:token withCompletion:^(BOOL isOK) {
+    if (isOK) {
+        // If the function reaches here, the LED was toggled.
+    }
+}];
+```
+
+Send a bitlash command
+```objc
+[pinoccioAPI sendBitlash:@"print temperature.f" withScoutID:selectedScout withTroopID:selectedTroop withToken:token withCompletion:^(NSDictionary *returnedJSON, BOOL isOK) {
+    if (isOK) {
+        // Do something with returnedJSON, the reply is the object "reply"
+        NSLog(@"%@",returnedJSON[@"reply"]);
     }
 }];
 ```
