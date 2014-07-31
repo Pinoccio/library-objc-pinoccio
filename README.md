@@ -22,12 +22,24 @@ PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init];
 
 Logging in. 
 ```objc
+NSString *token;
+BOOL isLoggedIn;
+
 pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" withCompletion:^(NSString *generatedToken, BOOL isOK) {
     if (isOK){
         token = generatedToken;
         isLoggedIn = YES;
     }else {
         NSLog(@"Username and password is incorrect!");
+    }
+}];
+```
+
+Logging out
+```objc
+[pinoccioAPI logoutWithToken:token withCompletion:^(BOOL isOK) {
+    if (isOK) {
+        [[[UIAlertView alloc] initWithTitle:@"Success!" message:@"You're logged out :D" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
     }
 }];
 ```
