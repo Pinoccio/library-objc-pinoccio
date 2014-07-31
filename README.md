@@ -30,7 +30,7 @@ pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" wit
         token = generatedToken;
         isLoggedIn = YES;
     }else {
-        NSLog(@"Username and password is incorrect!");
+        NSLog(@"Username or password is incorrect!");
     }
 }];
 ```
@@ -40,6 +40,8 @@ Logging out. Required arguments: token
 [pinoccioAPI logoutWithToken:token withCompletion:^(BOOL isOK) {
     if (isOK) {
         [[[UIAlertView alloc] initWithTitle:@"Success!" message:@"You're logged out :D" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil] show];
+    }else {
+        // Make sure you're logging out a token that is valid
     }
 }];
 ```
@@ -60,6 +62,8 @@ Get array of scouts in troop. Required arguments: TroopID, token
 [pinoccioAPI scoutsWithTroopID:1 withToken:token withCompletion:^(NSArray *scoutArray, BOOL isOK) {
     if (isOK) {
         // Do something with scoutArray
+    }else {
+        NSLog(@"Data is nil/null, check if user is logged in and token is valid.");
     }
 }];
 ```
