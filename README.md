@@ -12,5 +12,23 @@ How to
 import "Pinoccio.h"
 ```
 
-Functions
+Functions, basic usage.
 =========
+
+Initializing library
+```objc
+PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init];
+```
+
+Logging in. 
+```objc
+pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" withCompletion:^(NSString *generatedToken, BOOL isOK) {
+if (isOK){
+token = generatedToken;
+isLoggedIn = YES;
+
+}else {
+NSLog(@"Username and password is incorrect!");
+}
+}];
+```
