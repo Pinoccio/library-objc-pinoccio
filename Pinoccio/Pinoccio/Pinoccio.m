@@ -21,7 +21,7 @@
     [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 
--(void)loginwithCompletion:(void (^)(NSString *, BOOL))block {
+-(void)loginWithCompletion:(void (^)(NSString *, BOOL))block {
     NSString *post = [NSString stringWithFormat:@"{\"email\":\"%@\",\"password\":\"%@\"}",[keychainItem objectForKey:(__bridge id)(kSecAttrAccount)],[keychainItem objectForKey:(__bridge id)(kSecValueData)]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];

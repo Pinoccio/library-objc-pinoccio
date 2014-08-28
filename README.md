@@ -17,10 +17,29 @@ Functions, basic usage.
 
 Initializing library
 ```objc
-PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init];
+PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init]; // this also initializes the keychain wrapper
 ```
 
-Logging in. Required arguments: email, password
+Setting login email and password
+```objc
+[pinoccioAPI setPinoccioEmail:@"foo@bar.com"];
+[pinoccioAPI setPinoccioPassword:@"foobizzle360noscope];
+
+```
+Logging in (changed API) This uses the set email and password stored in the keychain.
+```objc
+[pinoccioAPI loginWithCompletion:^(NSString *generatedToken, BOOL isOK) {
+    if (isOK){
+        token = generatedToken;
+        isLoggedIn = YES;
+    }else {
+        NSLog(@"Username or password is incorrect!");
+    }
+
+}
+```
+
+Logging in. Required arguments: email, password (*Depredicated*)
 ```objc
 NSString *token; // This and the bool can be a global variable that can be used anywhere in the class, the example demos this.
 BOOL isLoggedIn;

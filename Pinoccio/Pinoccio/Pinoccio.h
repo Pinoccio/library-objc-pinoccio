@@ -24,7 +24,7 @@
 // Token
 -(void)setPinoccioEmail:(NSString *)email;
 -(void)setPinoccioPassword:(NSString *)password;
--(void)loginwithCompletion:(void (^)(NSString *, BOOL))block;
+-(void)loginWithCompletion:(void (^)(NSString *, BOOL))block;
 -(void)logoutWithToken:(NSString *)token withCompletion:(void (^)(BOOL))block; // Completes with BOOL, YES = logged out and NO = logout was unsuccessful
 
 // Troop management
