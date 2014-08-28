@@ -17,13 +17,13 @@ Added;
             }
         ```
 Depredicated but still implemented;
-        ```objc
-            pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" withCompletion:^(NSString *generatedToken, BOOL isOK) {
-                if (isOK){
-                    token = generatedToken;
-                    isLoggedIn = YES;
-                }else {
-                    NSLog(@"Username or password is incorrect!");
-                }
-            }];
-        ```
+```objc
+    pinoccioAPI loginWithCredentials:@"dylan@pinocc.io" password:@"Password2014" withCompletion:^(NSString *generatedToken, BOOL isOK) {
+        if (isOK){
+            token = generatedToken;
+            isLoggedIn = YES;
+        }else {
+            NSLog(@"Username or password is incorrect!");
+        }
+    }];
+```
