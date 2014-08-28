@@ -9,8 +9,20 @@
 #import "Pinoccio.h"
 
 @implementation Pinoccio
--(void)loginWithCredentials:(NSString *)email password:(NSString *)password withCompletion:(void (^)(NSString *, BOOL))block {
-    NSString *post = [NSString stringWithFormat:@"{\"email\":\"%@\",\"password\":\"%@\"}",email,password];
+-(id)init{
+    keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"PinoccioAPI_Keychain" accessGroup:nil];
+    return self;
+}
+-(void)setPinoccioEmail:(NSString *)email {
+    [keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
+}
+
+-(void)setPinoccioPassword:(NSString *)password {
+    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
+}
+
+-(void)loginwithCompletion:(void (^)(NSString *, BOOL))block {
+    NSString *post = [NSString stringWithFormat:@"{\"email\":\"%@\",\"password\":\"%@\"}",[keychainItem objectForKey:(__bridge id)(kSecAttrAccount)],[keychainItem objectForKey:(__bridge id)(kSecValueData)]];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
     
@@ -19,7 +31,7 @@
     [request setHTTPMethod:@"POST"];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    
+
     [request setHTTPBody:postData];
     
     NSURLResponse *response;

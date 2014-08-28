@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     pinoccioAPI = [[Pinoccio alloc] init]; // Initialize library
-
+    double x = 192826;
     // Do any additional setup after loading the view, typically from a nib.
 }
 -(void)getAllData {
@@ -53,7 +53,9 @@
 }
 
 - (IBAction)login:(id)sender {
-    [pinoccioAPI loginWithCredentials:self.emailField.text password:self.passwordField.text withCompletion:^(NSString *generatedToken, BOOL isOK) {
+    [pinoccioAPI setPinoccioPassword:self.passwordField.text];
+    [pinoccioAPI setPinoccioEmail:self.emailField.text];
+    [pinoccioAPI loginwithCompletion:^(NSString *generatedToken, BOOL isOK) {
         if (isOK){
             token = generatedToken;
             isLoggedIn = YES;
