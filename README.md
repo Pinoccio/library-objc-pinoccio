@@ -24,14 +24,13 @@ Setting login email and password
 ```objc
 [pinoccioAPI setPinoccioEmail:@"foo@bar.com"];
 [pinoccioAPI setPinoccioPassword:@"foobizzle360noscope];
-
 ```
 Logging in (changed API) This uses the set email and password stored in the keychain.
 ```objc
 [pinoccioAPI loginWithCompletion:^(NSString *generatedToken, BOOL isOK) {
     if (isOK){
-        token = generatedToken;
-        isLoggedIn = YES;
+        token = generatedToken; // token is a NSString
+        isLoggedIn = YES; // isLoggedIn is global bool and to be checked if already logged in
     }else {
         NSLog(@"Username or password is incorrect!");
     }
