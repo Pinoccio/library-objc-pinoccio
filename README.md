@@ -7,7 +7,7 @@ How to
 ======
 1. Download the zip [here](https://github.com/Pinoccio/library-objc-pinoccio/releases)
 2. Drag the Pinoccio header and class file into your iOS project, Copy to project directory if needed, and add to your iOS app's target.
-3. Add the header to whatever class you need to use the APi in.
+3. Add the header to whatever class you need to use the API in, like so;
 ```objc
 #import "Pinoccio.h"
 ```
@@ -23,7 +23,7 @@ PinoccioAPI *pinoccioAPI = [[PinoccioAPI alloc] init]; // this also initializes 
 Setting login email and password
 ```objc
 [pinoccioAPI setPinoccioEmail:@"foo@bar.com"];
-[pinoccioAPI setPinoccioPassword:@"foobizzle360noscope];
+[pinoccioAPI setPinoccioPassword:@"foobarbaz123"];
 ```
 Logging in (changed API) This uses the set email and password stored in the keychain.
 ```objc
